@@ -1,0 +1,43 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accessible Communication Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Accessible Communication Portal</h1>
+    <a href="/" class="home-btn">Home</a>
+    <div class="menu-icon" onclick="toggleDropdown()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="dropdown" id="dropdownMenu">
+      <a href="/login"><button>Login</button></a>
+      <a href="/signup"><button>Sign Up</button></a>
+    </div>
+  </header>
+
+  <div class="description" id="descriptionBox">
+    <p>
+      Welcome to the Accessible Communication Portal — a platform designed to bridge communication gaps...
+    </p>
+    <ul>
+      <li>🔊 For blind users, voice-based input enhances accessibility and ease of use.</li>
+      <li>🤟 For deaf users, hand gesture recognition is used to facilitate communication.</li>
+    </ul>
+    <p>Our mission is to empower inclusive and intuitive digital interactions for everyone.</p>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Accessible Communication Portal</p>
+  </footer>
+
+  <script src="/static/js/auth.js"></script>
+</body>
+</html>

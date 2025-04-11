@@ -1,0 +1,28 @@
+<!-- templates/signup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Sign Up</h1>
+    <a href="/" class="home-btn">Home</a>
+  </header>
+
+  <div class="container" id="authBox">
+    <video id="webcam" autoplay playsinline></video>
+    <input type="text" placeholder="First Name" id="firstName" />
+    <input type="text" placeholder="Last Name" id="lastName" />
+    <input type="email" placeholder="Email" id="email" />
+    <input type="text" placeholder="Username" id="username" />
+    <button onclick="handleSignup()">Sign Up</button>
+  </div>
+
+  <footer><p>&copy; 2025 Accessible Communication Portal</p></footer>
+  <script src="/static/js/auth.js"></script>
+</body>
+</html>

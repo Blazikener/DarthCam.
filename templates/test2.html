@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Users</title>
+</head>
+<body>
+    <h1>Hello {{ name }}!</h1>
+    <h2>List of users:</h2>
+    <ul>
+        {% for username in usernames %}
+        <li>{{ username }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

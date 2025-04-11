@@ -1,0 +1,9 @@
+opencv-python
+opencv-contrib-python
+numpy
+pyttsx3
+ultralytics
+mediapipe
+openai
+transformers
+gpt4all
