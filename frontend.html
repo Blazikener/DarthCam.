@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accessible Communication Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #121212;
+      color: #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #1f1f1f;
+      color: #ffffff;
+      padding: 20px;
+      position: relative;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+    .menu-icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .menu-icon div {
+      width: 25px;
+      height: 3px;
+      background-color: #bb86fc;
+      transition: all 0.3s ease;
+    }
+    .contact-btn {
+      position: absolute;
+      top: 20px;
+      right: 60px;
+      
+      border: none;
+      padding: 8px 16px;
+      color: #bb86fc;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: color 0.3s ease-in-out;
+    }
+    .contact-btn:hover {
+      color: #ffffff;
+    }
+    .dropdown {
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background-color: #2a2a2a;
+      border: 1px solid #444;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      display: none;
+      flex-direction: column;
+    }
+    .dropdown button {
+      padding: 10px 20px;
+      background: none;
+      border: none;
+      color: #fff;
+      text-align: left;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .dropdown button:hover {
+      background-color: #3a3a3a;
+    }
+    .description {
+      padding: 20px;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.2em;
+      color: #cccccc;
+      opacity: 1;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .description.hidden {
+      opacity: 0;
+      pointer-events: none;
+      height: 0;
+      overflow: hidden;
+    }
+    .container {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+      text-align: center;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      width: 90%;
+      max-width: 400px;
+      margin: 20px auto;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    video {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 5px;
+      border: none;
+      font-size: 1em;
+    }
+    .button-group {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 100%;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    button {
+      flex: 1;
+      padding: 12px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #bb86fc, #985eff);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      max-width: 120px;
+    }
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.6);
+      background: linear-gradient(135deg, #985eff, #bb86fc);
+    }
+    .home-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: #1f1f1f;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+    .home-btn img {
+      width: 24px;
+      height: 24px;
+      display: block;
+      background-color: #1f1f1f;
+      border-radius: 4px;
+    }
+    footer {
+      background-color: #1f1f1f;
+      color: #aaa;
+      text-align: center;
+      padding: 20px;
+      margin-top: auto;
+    }
+    footer .social-icons img {
+      width: 32px;
+      height: 32px;
+      margin: 0 8px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    footer .social-icons img:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>DARTHCAM.</h1>
+    <button class="home-btn" onclick="goHome()" aria-label="Go Home">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/home.png" alt="Home">
+    </button>
+    <button class="contact-btn" onclick="document.querySelector('footer').scrollIntoView({ behavior: 'smooth' });">Contact</button>
+    <div class="menu-icon" onclick="toggleDropdown()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="dropdown" id="dropdownMenu">
+      <button onclick="showAuth('login')">Login</button>
+      <button onclick="showAuth('signup')">Sign Up</button>
+    </div>
+  </header>
+
+  <div class="description" id="descriptionBox">
+    <p>
+      Welcome to the Accessible Communication Portal — a platform designed to bridge communication gaps for individuals who are blind or deaf. This website enables seamless interaction using advanced technology:
+    </p>
+    <ul style="text-align:left; max-width:600px; margin: 0 auto; color: #bbbbbb;">
+      <li>🔊 For blind users, voice-based input enhances accessibility and ease of use.</li>
+      <li>🤟 For deaf users, hand gesture recognition is used to facilitate communication.</li>
+    </ul>
+    <p>
+      Our mission is to empower inclusive and intuitive digital interactions for everyone.
+    </p>
+  </div>
+
+  <div class="container" id="authBox">
+    <h2 id="authTitle">Login / Signup</h2>
+    <video id="webcam" autoplay playsinline></video>
+    <div id="signupFields" style="width: 100%; display: none;">
+      <input type="text" placeholder="First Name" id="firstName" />
+      <input type="text" placeholder="Last Name" id="lastName" />
+      <input type="email" placeholder="Email" id="email" />
+      <input type="text" placeholder="Username" id="username" />
+    </div>
+    <div class="button-group">
+      <button onclick="handleAuth(currentAuthType)">Authenticate</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Accessible Communication Portal</p>
+    <p>
+      <a href="#">Contact Us</a> |
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Support Us</a>
+    </p>
+    <div class="social-icons">
+      <h4>Follow Us On</h4>
+      <a href="#" aria-label="Follow us on Twitter">
+        <img src="assets/icons8-twitter-50.png" alt="Twitter">
+      </a>
+      <a href="#" aria-label="Follow us on Facebook">
+        <img src="assets/icons8-facebook-50.png" alt="Facebook">
+      </a>
+      <a href="#" aria-label="Follow us on Instagram">
+        <img src="assets/icons8-instagram-logo-50.png" alt="Instagram">
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    const video = document.getElementById('webcam');
+    const authBox = document.getElementById('authBox');
+    const descriptionBox = document.getElementById('descriptionBox');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const authTitle = document.getElementById('authTitle');
+    const signupFields = document.getElementById('signupFields');
+    let currentAuthType = 'login';
+
+    function toggleDropdown() {
+      dropdownMenu.style.display = dropdownMenu.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function showAuth(type) {
+      dropdownMenu.style.display = 'none';
+      descriptionBox.classList.add('hidden');
+      authBox.style.display = 'flex';
+      currentAuthType = type;
+      authTitle.textContent = type === 'login' ? 'Login' : 'Sign Up';
+      signupFields.style.display = type === 'signup' ? 'block' : 'none';
+    }
+
+    function goHome() {
+      authBox.style.display = 'none';
+      descriptionBox.classList.remove('hidden');
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        goHome();
+      } else if (e.key.toLowerCase() === 'h') {
+        goHome();
+      }
+    });
+
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then((stream) => {
+        video.srcObject = stream;
+      })
+      .catch((err) => {
+        alert('Webcam access denied or not available');
+        console.error(err);
+      });
+
+    function captureImage() {
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const context = canvas.getContext('2d');
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      return canvas.toDataURL('image/jpeg');
+    }
+
+    function handleAuth(action) {
+      const image = captureImage();
+      const payload = { image };
+
+      if (action === 'signup') {
+        payload.firstName = document.getElementById('firstName').value;
+        payload.lastName = document.getElementById('lastName').value;
+        payload.email = document.getElementById('email').value;
+        payload.username = document.getElementById('username').value;
+      }
+
+      fetch(`/${action}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert(data.message || `${action} successful!`);
+      })
+      .catch(err => {
+        console.error(err);
+        alert('Error during authentication.');
+      });
+    }
+  </script>
+</body>
+</html>
