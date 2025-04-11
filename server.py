@@ -43,7 +43,7 @@ async def get_signup(request: Request):
 @app.post("/signup")
 async def post_signup(data: SignupData):
     try:
-        image_data = data.image.split(',')[1] if ',' in data.image else data.image
+        image_data = data.image  
         image_bytes = base64.b64decode(image_data)
         timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
         filename = f"{data.username}_{timestamp}.jpg"
